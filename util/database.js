@@ -1,20 +1,13 @@
-//путь к базе данных без сиквалайза
-/*
-const mysql = require('mysql2');
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    database: 'node-complete',
-    password: 'M15201983'
-});
+const mongoConnect = callback=>{
+    MongoClient.connect('mongodb+srv://Marina:nefkod-9sefQa-kusrap@clusternode-ssn1c.mongodb.net/test?retryWrites=true')
+        .then(client => {
+            console.log('Connect!');
+            callback(client);
+        })
+        .catch(err=>console.log(err));
+};
 
-module.exports = pool.promise();*/
-
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('node-complete', 'root', 'M15201983', {
-    dialect: 'mysql',
-    host: 'localhost'
-});
-
-module.exports = sequelize;
+module.exports = mongoConnect;
